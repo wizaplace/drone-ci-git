@@ -20,7 +20,7 @@ cd "$bareRepoPath"
 if [ ! -d "$bareRepoPath/refs" ]; then
     git clone --bare --mirror "$DRONE_REMOTE_URL" .
 else
-    git cat-file -t "$DRONE_COMMIT_SHA" 2>/dev/null 1>/dev/null
+    git cat-file -t "$DRONE_COMMIT_SHA" 2>/dev/null 1>/dev/null # test if we have the requested commit locally already
     result=$?
     if [ $result != 0 ]; then
         git fetch
@@ -28,4 +28,8 @@ else
 fi
 
 git worktree add "$DRONE_WORKSPACE" "$DRONE_COMMIT_SHA"
+git describe --tags "$DRONE_COMMIT_SHA" > "$DRONE_WORKSPACE/.gitTag" #@TODO : make it configurable somehow, or even separate in a different plugin
+
+rm -f "$DRONE_WORKSPACE/.git" # the bare repo won't be accessible by other steps, no use in keeping the reference
+git worktree prune
 
