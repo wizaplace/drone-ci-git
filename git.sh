@@ -28,7 +28,6 @@ else
 fi
 
 git worktree add "$DRONE_WORKSPACE" "$DRONE_COMMIT_SHA"
-git describe --tags "$DRONE_COMMIT_SHA" > "$DRONE_WORKSPACE/.gitTag" #@TODO : make it configurable somehow, or even separate in a different plugin
 
 rm -f "$DRONE_WORKSPACE/.git" # the bare repo won't be accessible by other steps, no use in keeping the reference
 git worktree prune
