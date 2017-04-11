@@ -4,7 +4,7 @@ echo "machine $DRONE_NETRC_MACHINE" >> "$HOME/.netrc"
 echo "login $DRONE_NETRC_USERNAME" >> "$HOME/.netrc"
 echo "password $DRONE_NETRC_PASSWORD" >> "$HOME/.netrc"
 
-set -x
+set -v
 
 if [ -z "$DRONE_WORKSPACE" ]; then
     DRONE_WORKSPACE=$(pwd)
