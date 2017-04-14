@@ -1,6 +1,6 @@
 # drone-ci-git
 
-Git plugin for Drone CI, using a single bare repo and `git archive`.
+Git plugin for Drone CI, using a single bare repo and [`git archive`](https://git-scm.com/docs/git-archive).
 
 [https://hub.docker.com/r/wizaplace/drone-ci-git](https://hub.docker.com/r/wizaplace/drone-ci-git)
 
