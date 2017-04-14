@@ -4,7 +4,8 @@ RUN apk update && \
   apk add \
     ca-certificates \
     git \
-    bash && \
+    bash \
+    tar && \
   rm -rf /var/cache/apk/*
 
 ADD git.sh /bin/
