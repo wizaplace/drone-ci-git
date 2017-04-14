@@ -5,11 +5,11 @@ echo "machine $DRONE_NETRC_MACHINE" >> "$HOME/.netrc"
 echo "login $DRONE_NETRC_USERNAME" >> "$HOME/.netrc"
 echo "password $DRONE_NETRC_PASSWORD" >> "$HOME/.netrc"
 
-echo "## Setting up workspace @ ${DRONE_WORKSPACE}"
 if [ -z "$DRONE_WORKSPACE" ]; then
     DRONE_WORKSPACE=$(pwd)
 else
     if [ ! -d "$DRONE_WORKSPACE" ]; then
+        echo "## Creating workspace (${DRONE_WORKSPACE})"
         mkdir -p "$DRONE_WORKSPACE"
     fi
 fi
@@ -33,6 +33,6 @@ else
     fi
 fi
 
-echo "## Exporting ${DRONE_COMMIT_SHA} to workspace"
+echo "## Exporting ${DRONE_COMMIT_SHA} to workspace (${DRONE_WORKSPACE})"
 set -e
 git archive --format=tar "$DRONE_COMMIT_SHA" | (cd "$DRONE_WORKSPACE" && tar xf -)
