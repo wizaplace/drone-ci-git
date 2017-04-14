@@ -33,18 +33,6 @@ else
     fi
 fi
 
-echo "## Creating worktree@${DRONE_COMMIT_SHA} in workspace"
-git worktree add "$DRONE_WORKSPACE" "$DRONE_COMMIT_SHA"
-
+echo "## Exporting ${DRONE_COMMIT_SHA} to workspace"
 set -e
-cd "$DRONE_WORKSPACE"
-actualRev=$(git rev-parse --verify HEAD)
-if [ $actualRev != $DRONE_COMMIT_SHA ]; then
-    exit 1
-fi
-cd "$bareRepoPath"
-set +e
-
-echo "## Cleaning up"
-rm -f "$DRONE_WORKSPACE/.git" # the bare repo won't be accessible by other steps, no use in keeping the reference
-git worktree prune
+git archive --format=tar "$DRONE_COMMIT_SHA" | (cd "$DRONE_WORKSPACE" && tar xf -)
