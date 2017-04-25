@@ -4,7 +4,9 @@ Git plugin for Drone CI, using a single bare repo and [`git archive`](https://gi
 
 ## Usage
 
-In your `.drone.yml`:
+The Docker image is hosted there: [wizaplace/drone-ci-git](https://hub.docker.com/r/wizaplace/drone-ci-git/)
+
+So in your `.drone.yml`:
 
 ```yml
 pipeline:
